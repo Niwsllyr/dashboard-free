@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard SPX — Controle total da sua operação de entregas</title>
+<meta name="description" content="SLA, DS, PNR e Backlog em um só painel, no PC e no celular. Teste a demonstração grátis e conheça a versão Premium.">
+<meta name="theme-color" content="#4a0a1e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dashboard SPX — Controle total da sua operação de entregas">
+<meta property="og:description" content="SLA, DS, PNR e Backlog em um só painel, no PC e no celular. Teste a demonstração grátis.">
+<meta property="og:image" content="assets/og.png">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+:root{
+  --vinho:#4a0a1e; --vinho2:#7a1230; --laranja:#f7931e; --laranja2:#e0740a;
+  --texto:#f4eef0; --muted:#c9b9be; --card:rgba(255,255,255,.06); --linha:rgba(255,255,255,.12);
+  --verde:#1fa75a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--texto);background:#1a0710;line-height:1.55}
+a{color:inherit}
+img{max-width:100%}
+.wrap{width:min(1120px,100% - 40px);margin:0 auto}
+
+/* topo */
+header{position:sticky;top:0;z-index:50;background:rgba(26,7,16,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+header .wrap{display:flex;align-items:center;gap:22px;height:64px}
+header .marca{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none}
+header .marca img{height:38px;width:auto}
+header nav{display:flex;gap:22px;margin-left:auto}
+header nav a{text-decoration:none;color:var(--muted);font-size:15px}
+header nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font-size:15.5px;font-weight:800;text-decoration:none;cursor:pointer;color:#fff;background:linear-gradient(180deg,var(--laranja),var(--laranja2));box-shadow:0 6px 20px rgba(224,116,10,.35);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.sec{background:transparent;border:1.6px solid var(--linha);box-shadow:none;color:var(--texto)}
+.btn.verde{background:linear-gradient(180deg,#27b866,var(--verde));box-shadow:0 6px 20px rgba(31,167,90,.3)}
+.btn.peq{padding:9px 16px;font-size:14px}
+
+/* hero */
+.hero{background:radial-gradient(1200px 500px at 80% -10%,rgba(247,147,30,.18),transparent 60%),linear-gradient(180deg,#4a0a1e 0%,#2a0813 70%,#1a0710 100%);padding:56px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.selo{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(247,147,30,.14);border:1px solid rgba(247,147,30,.4);color:#ffc98a;font-size:13.5px;font-weight:700;margin-bottom:16px}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;margin:0 0 16px;letter-spacing:-.5px}
+.hero h1 span{color:var(--laranja)}
+.hero p.sub{font-size:clamp(16px,2vw,19px);color:var(--muted);margin:0 0 26px;max-width:560px}
+.hero .acoes{display:flex;flex-wrap:wrap;gap:12px}
+.hero .mini{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;color:var(--muted);font-size:14.5px}
+.hero .mini b{color:#fff}
+
+/* celular */
+.celular{justify-self:center;width:min(340px,100%)}
+.tela-cel{position:relative;border-radius:38px;padding:34px 11px 11px;background:linear-gradient(160deg,#3a3a3f,#0d0d10);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08) inset}
+.tela-cel::before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);width:84px;height:20px;border-radius:12px;background:#0d0d10;z-index:2}
+.tela-cel iframe{display:block;width:100%;height:620px;border:0;border-radius:28px;background:#fbf3f3}
+.cel-nota{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px}
+.cel-nota a{color:#ffc98a}
+
+/* seções */
+section{padding:72px 0}
+section h2{font-size:clamp(26px,3.6vw,38px);margin:0 0 10px;letter-spacing:-.3px}
+section .lead{color:var(--muted);font-size:17px;margin:0 0 34px;max-width:680px}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--linha);border-radius:18px;padding:22px}
+.card .ico{font-size:28px;margin-bottom:10px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:p}
+.passo{position:relative;padding:22px 22px 22px 22px;border-radius:18px;background:linear-gradient(180deg,rgba(247,147,30,.10),rgba(255,255,255,.03));border:1px solid rgba(247,147,30,.25)}
+.passo::before{counter-increment:p;content:counter(p);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja);color:#2a0813;font-weight:900;margin-bottom:12px}
+.passo h3{margin:0 0 6px;font-size:18px}.passo p{margin:0;color:var(--muted);font-size:15px}
+#demo{background:linear-gradient(180deg,#1a0710,#2a0813)}
+#demo .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+.lista{list-style:none;margin:18px 0 26px;padding:0;display:grid;gap:10px}
+.lista li{display:flex;gap:10px;align-items:flex-start;color:#e8dde0}
+.lista li i{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-style:normal;font-weight:900}
+.lista li i.ok{background:rgba(31,167,90,.2);color:#5fd08e}
+.lista li i.bl{background:rgba(247,147,30,.2);color:#ffc98a}
+
+/* planos */
+.planos{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px}
+.plano{border-radius:22px;padding:28px;border:1px solid var(--linha);background:var(--card);display:flex;flex-direction:column}
+.plano.destaque{border:2px solid var(--laranja);background:linear-gradient(180deg,rgba(247,147,30,.12),rgba(255,255,255,.04));position:relative}
+.plano .tag{position:absolute;top:-13px;right:22px;background:var(--laranja);color:#2a0813;font-weight:900;font-size:12.5px;padding:5px 12px;border-radius:999px}
+.plano h3{margin:0;font-size:22px}
+.plano .preco{font-size:15px;color:var(--muted);margin:4px 0 16px}
+.plano ul{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:9px;flex:1}
+.plano li{display:flex;gap:9px;font-size:15px;color:#ece3e5}
+.plano li b.x{color:#8b7b80;font-weight:400}
+.plano li span.ck{color:#5fd08e;font-weight:900}
+.plano li span.cd{color:#ffc98a}
+.plano .btn{width:100%}
+
+/* contato */
+.contato{text-align:center;background:radial-gradient(800px 300px at 50% 0,rgba(247,147,30,.16),transparent 70%),#22090f;border-top:1px solid var(--linha)}
+.contato p{color:var(--muted);font-size:18px;max-width:640px;margin:0 auto 24px}
+.contato .num{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:.5px;margin:0 0 20px;color:#fff}
+footer{padding:26px 0 90px;border-top:1px solid var(--linha);color:#a8969c;font-size:13.5px;text-align:center}
+footer p{margin:4px auto;max-width:760px}
+
+/* botão flutuante */
+.zap{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;align-items:center;gap:8px;padding:13px 18px;border-radius:999px;background:linear-gradient(180deg,#27b866,var(--verde));color:#fff;font-weight:800;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+
+@media (max-width:900px){
+  .zap{width:54px;height:54px;padding:0;justify-content:center;font-size:24px}
+  .zap .txt{display:none}
+  header nav{display:none}
+  header .btn{margin-left:auto}
+  .hero .wrap,#demo .wrap{grid-template-columns:1fr}
+  .grade,.passos{grid-template-columns:1fr}
+  .planos{grid-template-columns:1fr}
+  .hero{padding:36px 0 44px}
+  section{padding:52px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="marca" href="#"><img src="assets/logo.png" alt="Dashboard SPX"></a>
+    <nav>
+      <a href="#recursos">Recursos</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#demo">Demonstração</a>
+      <a href="#planos">Planos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn peq verde" href="#contato">Quero o Premium</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="selo">Para operações de entrega</span>
+      <h1>Controle total da sua <span>operação de entregas</span></h1>
+      <p class="sub">SLA, DS, PNR e Backlog em um só painel, no PC e no celular. Menos planilha, menos desconto e mais entrega no prazo.</p>
+      <div class="acoes">
+        <a class="btn" href="#demo">Testar a demonstração grátis</a>
+        <a class="btn sec" href="#planos">Ver planos</a>
+      </div>
+      <div class="mini"><span>✔ <b>Backlog</b> e <b>PNR</b> completos na demo</span><span>✔ Sem instalar nada</span></div>
+    </div>
+    <div class="celular">
+      <div class="tela-cel"><iframe src="demo.html" title="Demonstração do Dashboard SPX" loading="lazy"></iframe></div>
+      <div class="cel-nota">Demonstração interativa · <a href="demo.html" target="_blank" rel="noopener">abrir em tela cheia</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="recursos">
+  <div class="wrap">
+    <h2>Tudo o que a sua operação precisa acompanhar</h2>
+    <p class="lead">Do número do dia até o pacote que está parado: cada informação no lugar certo, sempre atualizada.</p>
+    <div class="grade">
+      <div class="card"><div class="ico">📊</div><h3>SLA e DS</h3><p>Indicadores, meta e gráfico por hora, com regra própria para cada motivo de ocorrência.</p></div>
+      <div class="card"><div class="ico">📄</div><h3>PNR sob controle</h3><p>Reclamações em aberto, prazo, valor em risco e mensagem pronta para o entregador resolver.</p></div>
+      <div class="card"><div class="ico">📦</div><h3>Backlog</h3><p>Pacotes parados por faixa de dias, com filtros e resumo para copiar e enviar.</p></div>
+      <div class="card"><div class="ico">🚚</div><h3>Atuação dos entregadores</h3><p>Status da rota, tempo em rota e produtividade em %, para saber quem cobrar e quem incentivar.</p></div>
+      <div class="card"><div class="ico">🤖</div><h3>Atualização automática</h3><p>Um robô baixa SLA, DS, Backlog, PNR e Manifesto para você, com um clique.</p></div>
+      <div class="card"><div class="ico">📱</div><h3>App no celular</h3><p>Acompanhe tudo no Android e no iPhone, ligado ao seu computador.</p></div>
+      <div class="card"><div class="ico">💬</div><h3>WhatsApp</h3><p>Mensagens prontas para cobrar entregador e confirmar entrega com o cliente.</p></div>
+      <div class="card"><div class="ico">🗂️</div><h3>Análise de OP e histórico</h3><p>Evolução por dia, rankings dos melhores e piores e relatórios em PDF.</p></div>
+      <div class="card"><div class="ico">🔒</div><h3>Acesso protegido</h3><p>Entrada por login e liberação por plano. Os arquivos ficam no seu computador.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" style="padding-top:0">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="lead">Três passos e a sua operação passa a rodar com informação na mão.</p>
+    <div class="passos">
+      <div class="passo"><h3>Instale no PC</h3><p>Você recebe o instalador do Dashboard SPX e coloca no computador da sua base.</p></div>
+      <div class="passo"><h3>Entre uma vez no SPX</h3><p>Faça o login uma única vez. O painel guarda a sessão e passa a buscar os dados sozinho.</p></div>
+      <div class="passo"><h3>Atualize e acompanhe</h3><p>Um clique atualiza tudo, e você vê no PC e no celular, com filtros e resumos prontos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div>
+      <h2>Experimente agora</h2>
+      <p class="lead" style="margin-bottom:0">A demonstração usa dados fictícios. Use os botões do celular ao lado, do jeito que você usaria no dia a dia.</p>
+      <ul class="lista">
+        <li><i class="ok">✓</i><span><b>Backlog completo:</b> filtros, faixas de dias, resumo para copiar</span></li>
+        <li><i class="ok">✓</i><span><b>PNR completo:</b> resumo, lista, detalhe e mensagem pronta</span></li>
+        <li><i class="ok">✓</i><span>Gráfico básico de SLA e de DS</span></li>
+        <li><i class="bl">🔒</i><span>Indicadores completos, entregadores, robô, histórico e o restante: <b>versão Premium</b></span></li>
+      </ul>
+      <a class="btn" href="demo.html" target="_blank" rel="noopener">Abrir a demonstração em tela cheia</a>
+    </div>
+    <div class="celular">
+      <div class="tela-cel"><iframe src="demo.html?tela=backlog" title="Demonstração do Backlog" loading="lazy"></iframe></div>
+      <div class="cel-nota">Comece pelo <b>Backlog</b> ou pelo <b>PNR</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <div class="wrap">
+    <h2>Planos</h2>
+    <p class="lead">Comece testando de graça. Quando quiser tudo liberado, é só falar com a gente.</p>
+    <div class="planos">
+      <div class="plano">
+        <h3>Demonstração</h3>
+        <div class="preco">Grátis, direto no navegador</div>
+        <ul>
+          <li><span class="ck">✓</span> Backlog completo</li>
+          <li><span class="ck">✓</span> PNR completo</li>
+          <li><span class="ck">✓</span> Gráfico básico de SLA e DS</li>
+          <li><b class="x">🔒 Indicadores completos, entregadores, robô e histórico</b></li>
+        </ul>
+        <a class="btn sec" href="demo.html" target="_blank" rel="noopener">Testar agora</a>
+      </div>
+      <div class="plano destaque">
+        <span class="tag">Completo</span>
+        <h3>Premium</h3>
+        <div class="preco">Consulte valores e condições</div>
+        <ul>
+          <li><span class="ck">✓</span> Tudo da demonstração</li>
+          <li><span class="ck">✓</span> SLA e DS completos</li>
+          <li><span class="ck">✓</span> Atuação dos entregadores</li>
+          <li><span class="ck">✓</span> Robô de atualização automática</li>
+          <li><span class="ck">✓</span> Manifesto, Análise de OP e histórico</li>
+          <li><span class="ck">✓</span> Relatórios em PDF e texto</li>
+          <li><span class="ck">✓</span> WhatsApp direto para entregador e cliente</li>
+          <li><span class="ck">✓</span> App no celular (Android e iPhone)</li>
+        </ul>
+        <a class="btn verde" href="https://wa.me/5598992468209?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Dashboard%20SPX%20e%20quero%20comprar%20a%20vers%C3%A3o%20premium." target="_blank" rel="noopener">Quero o Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contato">
+  <div class="wrap">
+    <h2>Quer liberar tudo?</h2>
+    <p>Entre em contato com o número abaixo para comprar a versão premium.</p>
+    <div class="num">98992468209</div>
+    <a class="btn verde" href="https://wa.me/5598992468209?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Dashboard%20SPX%20e%20quero%20comprar%20a%20vers%C3%A3o%20premium." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Dashboard SPX</b> · Contato: 98992468209</p>
+    <p>A demonstração usa dados fictícios. O Dashboard SPX é uma ferramenta independente: Shopee e SPX são marcas de seus respectivos titulares, e não há vínculo oficial.</p>
+  </div>
+</footer>
+
+<a class="zap" href="https://wa.me/5598992468209?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Dashboard%20SPX%20e%20quero%20saber%20mais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><span>💬</span><span class="txt">Falar no WhatsApp</span></a>
+</body>
+</html>
